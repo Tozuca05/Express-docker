@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 FROM node:20
 
 # Create app directory
@@ -25,3 +26,32 @@ COPY . .
 EXPOSE 8080
 
 CMD [ "node", "index.js" ]
+=======
+FROM node:20
+
+# Create app directory
+
+WORKDIR /usr/src/app
+
+# Install app dependencies
+
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+
+# where available (npm@5+)
+
+COPY package*.json ./
+
+RUN npm install
+
+# If you are building your code for production
+
+# RUN npm ci --only=production
+
+# Bundle app source
+
+COPY . .
+
+EXPOSE 8080
+
+CMD [ "node", "index.js" ]
+>>>>>>> 83ed46c3328ab4e448fbc3d19e3ae80fb35b28d2
