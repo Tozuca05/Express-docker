@@ -14,11 +14,13 @@ jobs:
       # Paso para realizar el checkout del código
       - uses: actions/checkout@v3
       
-      # Paso para configurar Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20.x'  # Especificar la versión de Node.js como 20.x
+      # Paso para instalar Node.js y npm
+      - name: Install Node.js
+        run: |
+          curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+          node -v  # Verificar la versión de Node.js instalada
+          npm -v   # Verificar la versión de npm instalada
 
       # Paso para iniciar sesión en Docker
       - name: Docker login
