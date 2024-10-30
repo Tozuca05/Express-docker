@@ -13,7 +13,7 @@ jobs:
     steps:
       # Paso para realizar el checkout del código
       - name: Checkout code
-        uses: actions/checkout@v3  # Asegúrate de usar la versión más reciente
+        uses: actions/checkout@v3.1.0  # Especificar la versión más reciente
 
       # Paso para iniciar sesión en Docker
       - name: Docker login
