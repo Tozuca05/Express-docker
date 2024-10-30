@@ -12,15 +12,8 @@ jobs:
 
     steps:
       # Paso para realizar el checkout del código
-      - uses: actions/checkout@v3
-      
-      # Paso para instalar Node.js y npm
-      - name: Install Node.js
-        run: |
-          curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-          sudo apt-get install -y nodejs
-          node -v  # Verificar la versión de Node.js instalada
-          npm -v   # Verificar la versión de npm instalada
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       # Paso para iniciar sesión en Docker
       - name: Docker login
@@ -37,10 +30,3 @@ jobs:
       # Paso para subir la imagen Docker al repositorio
       - name: Docker Push
         run: docker push tozuca/express-randoquests
-      
-      # Paso opcional para limpiar la caché de Docker (puedes comentarlo si no es necesario)
-      - name: Cache Docker layers
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.docker
-          key: ${{ runner.os }}-docker-${{ github.sha }}
