@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Paso para realizar el checkout del código
+      - name: Checkout code
+        uses: actions/checkout@v2  # Cambiar a v2 para probar
+
+      # Paso para iniciar sesión en Docker
+      - name: Docker login
+        env:
+          DOCKER_USER: ${{ secrets.DOCKERHUB_USER }}
+          DOCKER_PASS: ${{ secrets.DOCKERHUB_PASS }}
+        run: |
+          echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
+
+      # Paso para construir la imagen Docker
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag tozuca/express-randoquests:latest
+
+      # Paso para subir la imagen Docker al repositorio
+      - name: Docker Push
+        run: docker push tozuca/express-randoquests
